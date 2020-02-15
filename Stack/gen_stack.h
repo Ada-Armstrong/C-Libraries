@@ -1,7 +1,7 @@
 #ifndef __GEN_STACK_H_
 #define __GEN_STACK_H_
-/* 
- * An implementation of a generic stack.
+
+/* An implementation of a generic stack.
  */
 
 #include <stdlib.h>
