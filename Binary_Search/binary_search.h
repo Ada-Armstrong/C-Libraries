@@ -1,5 +1,5 @@
-#ifndef _BINARY_SEARCH_
-#define _BINARY_SEARCH_
+#ifndef BINARY_SEARCH_H
+#define BINARY_SEARCH_H
 
 
 /* binary_search: Returns the index to item if it exists in array.
@@ -11,6 +11,6 @@
  * Runtime: O(log(n))
  */
 int binary_search(void *item, void *array[], int len,
-		int (*cmp_func)(const void *, const void *)); 
+		int (*cmp_func)(void *, void *)); 
 
 #endif

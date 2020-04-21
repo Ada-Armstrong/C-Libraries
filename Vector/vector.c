@@ -3,7 +3,9 @@
 struct vector {
 	void **data;
 	unsigned int len;
-	unsigned int maxlen; void (*free_func)(void *); void *(*cpy_func)(void *);
+	unsigned int maxlen;
+	void (*free_func)(void *);
+	void *(*cpy_func)(void *);
 };
 
 Vector create_vector(void (*free_func)(void *), void *(*cpy_func)(void *))

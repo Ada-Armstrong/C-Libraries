@@ -1,5 +1,5 @@
-#ifndef __GEN_STACK_H_
-#define __GEN_STACK_H_
+#ifndef CONTAINER_STACK_H
+#define CONTAINER_STACK_H
 
 /* An implementation of a generic stack.
  */
@@ -41,14 +41,14 @@ int push_stack(void *item, Stack s);
  */
 void *top_stack(Stack s);
 
-/* pop_stack: Returns the top item on the Stack. Client is responsible for freeing
- * 	this items memory.
+/* pop_stack: Returns the top item on the Stack. Client is responsible for
+ * 	freeing this items memory.
  * Runtime: O(1), amortized
  */
 void *pop_stack(Stack s);
 
-/* get_size_stack: Returns the number of items in the Stack. Can be used to check
- * 	if Stack is empty.
+/* get_size_stack: Returns the number of items in the Stack. Can be used to
+ * 	check if Stack is empty.
  * Runtime: O(1)
  */
 unsigned int get_size_stack(Stack s);

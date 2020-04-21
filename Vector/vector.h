@@ -1,5 +1,5 @@
-#ifndef _CONTAINER_VECTOR_H__
-#define _CONTAINER_VECTOR_H__
+#ifndef CONTAINER_VECTOR_H
+#define CONTAINER_VECTOR_H
 
 /* An implementation of a resizing array.
  */
