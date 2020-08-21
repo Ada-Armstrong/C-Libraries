@@ -4,7 +4,8 @@
 /* An implemenation of a generic heap. The heap is stored as a max-heap
  * according to cmp_func. cmp_func must use the same convention as strcmp,
  * returns -1, 0, 1 if the first argument is greater than, equal to, or less
- * than the second argument respectively.
+ * than the second argument respectively. Reversing the return values of 
+ * cmp_func allow you to use it as a min-heap.
  */
 
 #include <stdlib.h>
@@ -24,7 +25,7 @@ Heap create_heap(int (*cmp_func)(void *, void *), void (*free_func)(void *),
 		void *(*cpy_func)(void *));
 
 /* destroy_heap: Frees the memory allocated by create_heap.
- * Runtime: O(1)
+ * Runtime: O(n)
  */
 void destroy_heap(Heap h);
 
@@ -39,7 +40,8 @@ Heap copy_heap(Heap h);
  */
 int insert_heap(Heap h, void *item);
 
-/* extract_heap: Returns the top item on the Heap, if empty returns NULL.
+/* extract_heap: Returns the top item on the Heap, if empty returns NULL. The
+ * 	item is removed from the heap.
  * Runtime: O(log(n))
  */
 void *extract_heap(Heap h);

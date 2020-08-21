@@ -1,4 +1,4 @@
-#include "gen_stack.h"
+#include "stack.h"
 
 struct stack {
 	void **data;
@@ -11,8 +11,6 @@ struct stack {
 
 Stack create_stack(void (*free_func)(void *), void *(*cpy_func)(void *))
 {
-	assert(free_func);
-	assert(cpy_func);
 	Stack s = malloc(sizeof(struct stack));
 	if (!s)
 		return NULL;
@@ -46,11 +44,12 @@ void destroy_stack(Stack s)
 Stack copy_stack(Stack s)
 {
 	assert(s);
-	void *tmp = NULL;
-	Stack cpy = malloc(sizeof(struct stack));
-	if (cpy == NULL || !s->cpy_func) {
+	if (!s->cpy_func)
 		return NULL;
-	}
+	Stack cpy = malloc(sizeof(struct stack));
+	if (!cpy)
+		return NULL;
+
 	cpy->data = NULL;
 	cpy->len = s->len;
 	cpy->max = s->max;
@@ -59,14 +58,18 @@ Stack copy_stack(Stack s)
 	if (!s->data) {
 		return cpy;
 	}
+
 	cpy->data = malloc(cpy->max * sizeof(void *));
-	if (cpy->data == NULL) {
+	if (!cpy->data) {
 		destroy_stack(cpy);
 		return NULL;
 	}
+
+	void *tmp = NULL;
 	for (int i = 0; i < s->len; ++i) {
 		tmp = cpy->cpy_func(s->data[i]); 
 		if (!tmp) {
+			/* TODO: check errno first */
 			/* clean up if cpy_func returns NULL */
 			for (int j = i - 1; j >= 0; --j) {
 				cpy->free_func(cpy->data[j]);
@@ -79,7 +82,7 @@ Stack copy_stack(Stack s)
 	return cpy;
 }
 
-int push_stack(void *item, Stack s)
+int push_stack(Stack s, void *item)
 {
 	assert(s);
 	assert(item);
@@ -101,11 +104,7 @@ int push_stack(void *item, Stack s)
 void *top_stack(Stack s)
 {
 	assert(s);
-	if (s->len == 0)
-		return NULL;
-	void *item_cpy = NULL;
-	item_cpy = s->cpy_func(s->data[s->len - 1]);
-	if (!item_cpy)
+	if (!s->len)
 		return NULL;
 	return s->data[s->len - 1];
 }
@@ -113,7 +112,7 @@ void *top_stack(Stack s)
 void *pop_stack(Stack s)
 {
 	assert(s);
-	if (s->len == 0)
+	if (!s->len)
 		return NULL;
 	void **tmp = NULL;
 	if (s->len < s->max / 2) {
@@ -126,7 +125,7 @@ void *pop_stack(Stack s)
 	return s->data[s->len];
 }
 
-unsigned int get_size_stack(Stack s)
+unsigned int size_stack(Stack s)
 {
 	assert(s);
 	return s->len;

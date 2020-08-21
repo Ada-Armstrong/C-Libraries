@@ -17,7 +17,7 @@ typedef struct vector *Vector;
  */
 Vector create_vector(void (*free_func)(void *), void *(*cpy_func)(void *));
 
-/* destroy_vector: Frees teh memory allocated by create_vector.
+/* destroy_vector: Frees the memory allocated by create_vector.
  * Runtime: O(1)
  */
 void destroy_vector(Vector v);

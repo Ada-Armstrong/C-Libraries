@@ -18,7 +18,7 @@ typedef struct stack *Stack;
 Stack create_stack(void (*free_func)(void *), void *(*cpy_func)(void *));
 
 /* destroy_stack: Frees the memory allocated by create_stack.
- * Runtime: O(1)
+ * Runtime: O(n)
  */
 void destroy_stack(Stack s);
 
@@ -29,14 +29,13 @@ void destroy_stack(Stack s);
 Stack copy_stack(Stack s);
 
 /* push_stack: Places item on the top of the Stack, item must be heap allocated. 
- * 	Returns 0 if successful, 1 if resizing failed, and 2 if copying failed.
+ * 	Returns 0 if successful and 1 if resizing failed.
  * Runtime: O(1)
  */
-int push_stack(void *item, Stack s);
+int push_stack(Stack s, void *item);
 
-/* top_stack: Returns a copy of the top item on the Stack. Returns NULL if the
- * 	Stack is empty or copying the item failed. Client is responsible for
- * 	freeing the copied items memory.
+/* top_stack: Returns the top item on the Stack. Returns NULL if the
+ * 	Stack is empty or copying the item failed.
  * Runtime: O(1), amortized
  */
 void *top_stack(Stack s);
@@ -47,10 +46,10 @@ void *top_stack(Stack s);
  */
 void *pop_stack(Stack s);
 
-/* get_size_stack: Returns the number of items in the Stack. Can be used to
+/* size_stack: Returns the number of items in the Stack. Can be used to
  * 	check if Stack is empty.
  * Runtime: O(1)
  */
-unsigned int get_size_stack(Stack s);
+unsigned int size_stack(Stack s);
 
 #endif

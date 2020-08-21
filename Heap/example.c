@@ -1,19 +1,30 @@
+/* Expects integers as command line arguments and sorts them
+ * in non-decreasing order.
+ * Uses a min-heap to sort.
+ */
+
 #include <stdio.h>
 #include "heap.h"
-
-int array[] = {4, -11, 33, 7, 8, -43, 5};
 
 int min_heap(void *x, void *y);
 
 void nothing(void *a);
 
-
-int main(void)
+int main(int argc, char *argv[])
 {
+	int *array = malloc(sizeof(*array) * argc);
+	if (!array)
+		return -1;
+
+	int n;
+	for (int i = 1; i < argc; ++i) {
+		n = atoi(argv[i]);
+		array[i-1] = n;
+	}
+
 	Heap h = create_heap(min_heap, nothing, NULL);
 
-	for (int i = 0; i < 7; ++i) {
-		printf("inserting %d\n", array[i]);
+	for (int i = 0; i < argc - 1; ++i) {
 		if (insert_heap(h, array + i) != 0) {
 			return 1;
 		}

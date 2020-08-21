@@ -1,7 +1,7 @@
 #include "binary_search.h"
 
 int binary_search(void *item, void *array[], int len,
-		int (*cmp_func)(const void *, const void *))
+		int (*cmp_func)(void *, void *))
 {
 	if (!item || !array || len < 0 || !cmp_func)
 		return -1;

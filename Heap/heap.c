@@ -58,7 +58,7 @@ Heap copy_heap(Heap h)
 		return NULL;
 
 	cpy->max_len = h->max_len;
-	void **tmp = realloc(cpy->data, sizeof(*(cpy_data)) * cpy->max_len);
+	void **tmp = realloc(cpy->data, sizeof(*(cpy->data)) * cpy->max_len);
 	if (!tmp) {
 		destroy_heap(cpy);
 		return NULL;
